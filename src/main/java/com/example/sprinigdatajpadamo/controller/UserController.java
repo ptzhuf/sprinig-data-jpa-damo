@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/demo")
@@ -18,6 +21,12 @@ public class UserController {
     public void addNewUser(@RequestParam String name, @RequestParam String email) {
         User u = User.builder().name(name).email(email).build();
         userRepository.save(u);
+    }
+
+    @GetMapping("/users/name")
+    public List<User> findByName(@RequestParam String name) {
+         return userRepository.findByAndSort(name,
+                JpaSort.unsafe(Sort.Direction.ASC, "LENGTH(name)"));
     }
 
     @GetMapping("/all")
