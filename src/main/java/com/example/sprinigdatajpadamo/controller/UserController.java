@@ -1,5 +1,6 @@
 package com.example.sprinigdatajpadamo.controller;
 
+import com.example.sprinigdatajpadamo.domain.Gender;
 import com.example.sprinigdatajpadamo.domain.User;
 import com.example.sprinigdatajpadamo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/add")
-    public void addNewUser(@RequestParam String name, @RequestParam String email) {
-        User u = User.builder().name(name).email(email).build();
+    public void addNewUser(@RequestParam String name, @RequestParam String email, @RequestParam Gender gender) {
+        User u = User.builder().name(name).email(email).gender(gender).build();
         userRepository.save(u);
     }
 

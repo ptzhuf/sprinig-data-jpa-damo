@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -27,4 +24,9 @@ public class User {
      * 邮件.
      */
     private String email;
+    /**
+     * 性别.
+     */
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 }
